@@ -1,0 +1,32 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class CustomSceneManager : MonoBehaviour
+{
+    private static Stack<string> _scenes = new();
+
+    void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+        SceneManager.LoadScene("Menu");
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            LoadPreviousScene();
+    }
+
+    public static void LoadScene(string sceneName)
+    {
+        _scenes.Push(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public static void LoadPreviousScene()
+    {
+        if (!string.IsNullOrEmpty(_scenes.Peek()))
+            SceneManager.LoadScene(_scenes.Pop());
+    }
+}

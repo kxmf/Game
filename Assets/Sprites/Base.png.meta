@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e7440d7d7a3d430438e4533041a6a80c
+guid: 63fd5f4abc7a5a047ab8a8760c98bd47
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4205964583542994691
-    second: GrassRight_0
+      213: 6234176133674011997
+    second: Base_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GrassRight_0
+      name: Base_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 354
-        height: 171
+        width: 2060
+        height: 104
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 30734fb21869e5a30800000000000000
-      internalID: 4205964583542994691
+      spriteID: d5d8bdad92e348650800000000000000
+      internalID: 6234176133674011997
       vertices: []
       indices: 
       edges: []

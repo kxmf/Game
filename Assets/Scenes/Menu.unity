@@ -550,7 +550,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1357878488}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 342532280}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: OpenSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainMenu.OpenSettings
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1357878488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,7 +662,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 10
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -678,7 +690,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1836836877358403606, guid: 8b888751c08303d49888b996c2595be4, type: 3}
+  m_Sprite: {fileID: -8165508299633942148, guid: 4bbf4a9064c57514cbbe6ae6277c1e7d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
