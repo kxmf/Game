@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Floor_1
   m_EditorClassIdentifier: 
   floorName: First
+  floorSceneName: Floor_1
   levels:
   - levelName: A
     sceneName: Level_1

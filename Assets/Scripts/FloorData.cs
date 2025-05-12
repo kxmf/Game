@@ -4,5 +4,6 @@ using UnityEngine;
 public class FloorData : ScriptableObject
 {
     public string floorName;
+    public string floorSceneName;
     public LevelData[] levels;
 }

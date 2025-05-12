@@ -18,10 +18,10 @@ public class CustomSceneManager : MonoBehaviour
             LoadPreviousScene();
     }
 
-    public static void LoadScene(string sceneName)
+    public static void LoadScene(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
     {
         _scenes.Push(SceneManager.GetActiveScene().name);
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName, mode);
     }
 
     public static void LoadPreviousScene()

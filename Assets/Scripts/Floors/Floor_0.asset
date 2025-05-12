@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Floor_0
   m_EditorClassIdentifier: 
   floorName: Archive
+  boardSceneName: Floor_0
   levels:
   - levelName: A
     sceneName: Level_1
