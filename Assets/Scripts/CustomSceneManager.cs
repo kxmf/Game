@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class CustomSceneManager : MonoBehaviour
 {
-    private static Stack<string> _scenes = new();
+    private static readonly Stack<string> _scenes = new();
 
     void Start()
     {
