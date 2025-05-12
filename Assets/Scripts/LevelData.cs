@@ -4,5 +4,4 @@ using UnityEngine;
 public class LevelData
 {
     public string levelName;
-    public string sceneName;
 }

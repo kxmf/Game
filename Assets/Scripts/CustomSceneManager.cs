@@ -6,13 +6,13 @@ public class CustomSceneManager : MonoBehaviour
 {
     private static readonly Stack<string> _scenes = new();
 
-    void Start()
+    private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
         SceneManager.LoadScene("Menu");
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             LoadPreviousScene();

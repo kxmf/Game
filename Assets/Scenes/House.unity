@@ -130,9 +130,10 @@ GameObject:
   - component: {fileID: 73990000}
   - component: {fileID: 73990003}
   - component: {fileID: 73990002}
+  - component: {fileID: 73990004}
   - component: {fileID: 73990001}
   m_Layer: 5
-  m_Name: Back
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,9 +202,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1494407664}
-        m_TargetAssemblyTypeName: House, Assembly-CSharp
-        m_MethodName: Back
+      - m_Target: {fileID: 73990004}
+        m_TargetAssemblyTypeName: BackButtonHandler, Assembly-CSharp
+        m_MethodName: LoadPreviousScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -251,6 +252,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73989999}
   m_CullTransparentMesh: 1
+--- !u!114 &73990004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73989999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac6ee1825cb0e84aaa27e22377b1419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &97645747
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,8 +276,9 @@ GameObject:
   - component: {fileID: 97645751}
   - component: {fileID: 97645750}
   - component: {fileID: 97645749}
+  - component: {fileID: 97645752}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: SettingsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -333,9 +347,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1494407664}
-        m_TargetAssemblyTypeName: House, Assembly-CSharp
-        m_MethodName: Settings
+      - m_Target: {fileID: 97645752}
+        m_TargetAssemblyTypeName: SettingsButtonHandler, Assembly-CSharp
+        m_MethodName: LoadSettingsScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -383,6 +397,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97645747}
   m_CullTransparentMesh: 1
+--- !u!114 &97645752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97645747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c211380ba912343bb296dff89fe43b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &136973274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,7 +1426,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1494407665}
-  - component: {fileID: 1494407664}
   m_Layer: 5
   m_Name: House
   m_TagString: Untagged
@@ -1408,18 +1433,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1494407664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494407663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4742ba6ae465e41980c5cc07dc0d0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1494407665
 Transform:
   m_ObjectHideFlags: 0

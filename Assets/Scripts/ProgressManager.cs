@@ -8,7 +8,7 @@ public class ProgressManager : MonoBehaviour
 
     private HashSet<string> completedLevels = new();
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
@@ -24,13 +24,13 @@ public class ProgressManager : MonoBehaviour
             SaveProgress();
     }
 
-    void LoadProgress()
+    private void LoadProgress()
     {
         var json = PlayerPrefs.GetString("ProgressData", "{}");
         completedLevels = JsonUtility.FromJson<SerializableSet>(json).ToHash();
     }
 
-    void SaveProgress()
+    private void SaveProgress()
     {
         var json = JsonUtility.ToJson(new SerializableSet(completedLevels));
         PlayerPrefs.SetString("ProgressData", json);

@@ -443,7 +443,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1250040096}
-  - component: {fileID: 1250040097}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -467,18 +466,6 @@ Transform:
   - {fileID: 154330260}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1250040097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1250040095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dda080d17ad5d34faf781658f18fc33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1391217960
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,9 +556,10 @@ GameObject:
   - component: {fileID: 1742685233}
   - component: {fileID: 1742685236}
   - component: {fileID: 1742685235}
+  - component: {fileID: 1742685237}
   - component: {fileID: 1742685234}
   m_Layer: 5
-  m_Name: Back
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,9 +628,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1250040097}
-        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-        m_MethodName: Back
+      - m_Target: {fileID: 1742685237}
+        m_TargetAssemblyTypeName: BackButtonHandler, Assembly-CSharp
+        m_MethodName: LoadPreviousScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -690,6 +678,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742685232}
   m_CullTransparentMesh: 1
+--- !u!114 &1742685237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742685232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac6ee1825cb0e84aaa27e22377b1419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
