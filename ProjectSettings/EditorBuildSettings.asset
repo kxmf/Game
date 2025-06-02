@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/House.unity
     guid: e20c0264c2435714c81d9a25aac460b4
   - enabled: 1
+    path: Assets/Scenes/Floor_1.unity
+    guid: 4c609ee153eb63148b4268b2cd19c3bd
+  - enabled: 0
     path: Assets/Scenes/Board.unity
     guid: 97c4487b25b9b0c4c93040e47a8c72f8
   - enabled: 0
