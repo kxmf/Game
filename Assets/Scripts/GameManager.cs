@@ -1,16 +1,39 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GameManager instance;
+
+    void Awake()
     {
-        
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
+
+        Debug.Log("GameManager Initialized!");
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        if (SceneManager.GetActiveScene().name == "InitScene")
+            LoadMainMenu();
+    }
+
+    public void LoadMainMenu()
+    {
+        Debug.Log("Loading Main Menu...");
+        SceneManager.LoadScene("MenuScene");
+    }
+
+    public void LoadGameScene(int floorIndex)
+    {
+        Debug.Log($"Loading Game Scene for floor {floorIndex}...");
+        // SceneManager.LoadScene("GameScene");
     }
 }
