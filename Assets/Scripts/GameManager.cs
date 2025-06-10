@@ -5,22 +5,30 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    private SaveManager saveManager;
+
+    public int UnlockedFloorsCount { get; private set; }
+
     void Awake()
     {
         if (instance != null && instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             return;
         }
 
         instance = this;
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
+
+        saveManager = GetComponent<SaveManager>();
 
         Debug.Log("GameManager Initialized!");
     }
 
     void Start()
     {
+        UnlockedFloorsCount = saveManager.LoadProgress();
+
         if (SceneManager.GetActiveScene().name == "InitScene")
             LoadMainMenu();
     }
