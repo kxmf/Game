@@ -53,4 +53,14 @@ public class UIManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
+
+    public void HandleEscapeOnMainMenu()
+    {
+        string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        if (currentSceneName == "MenuScene")
+            OnQuitButtonPressed();
+        else if (currentSceneName == "GameScene")
+            OnBackButtonPressed();
+    }
 }
