@@ -27,6 +27,9 @@ public class MainMenuView : MonoBehaviour
     private Button startButton;
 
     [SerializeField]
+    private Button settingsButton;
+
+    [SerializeField]
     private Button quitButton;
 
     [SerializeField]
@@ -44,6 +47,7 @@ public class MainMenuView : MonoBehaviour
         uiManager.RegisterMainMenuView(this);
 
         startButton.onClick.AddListener(uiManager.OnStartButtonPressed);
+        settingsButton.onClick.AddListener(uiManager.OnSettingsButtonPressed);
         quitButton.onClick.AddListener(uiManager.OnQuitButtonPressed);
         backButton.onClick.AddListener(uiManager.OnBackButtonPressed);
 

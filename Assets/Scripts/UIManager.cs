@@ -39,13 +39,6 @@ public class UIManager : MonoBehaviour
         mainMenuView.UpdateFloorButtons(GameManager.instance.UnlockedFloorsCount);
     }
 
-    public void OnBackButtonPressed()
-    {
-        if (mainMenuView == null)
-            return;
-        mainMenuView.ShowMainMenu();
-    }
-
     public void OnFloorButtonPressed(int floorIndex)
     {
         Debug.Log($"Player selected Floor {floorIndex}. Loading scene...");
@@ -60,6 +53,13 @@ public class UIManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+
+    public void OnBackButtonPressed()
+    {
+        if (mainMenuView == null)
+            return;
+        mainMenuView.ShowMainMenu();
     }
 
     public void OnGameSceneBackButtonPressed()
