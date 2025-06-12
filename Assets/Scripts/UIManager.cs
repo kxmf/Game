@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     private MainMenuView mainMenuView;
+    private GameSceneView gameSceneView;
 
     void Awake()
     {
@@ -21,6 +23,12 @@ public class UIManager : MonoBehaviour
     {
         mainMenuView = view;
         mainMenuView.ShowMainMenu();
+    }
+
+    public void RegisterGameSceneView(GameSceneView view)
+    {
+        gameSceneView = view;
+        Debug.Log("GameSceneView зарегистрирован в UIManager.");
     }
 
     public void OnStartButtonPressed()
@@ -54,13 +62,13 @@ public class UIManager : MonoBehaviour
 #endif
     }
 
-    public void HandleEscapeOnMainMenu()
+    public void OnGameSceneBackButtonPressed()
     {
-        string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        GameManager.instance.LoadMainMenu();
+    }
 
-        if (currentSceneName == "MenuScene")
-            OnQuitButtonPressed();
-        else if (currentSceneName == "GameScene")
-            OnBackButtonPressed();
+    public void OnSettingsButtonPressed()
+    {
+        SceneManager.LoadScene("SettingsScene");
     }
 }
