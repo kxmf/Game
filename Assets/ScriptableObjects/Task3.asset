@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de39ddcc8d7a8fc4592499b15b5a0b48, type: 3}
-  m_Name: Task1
+  m_Name: Task3
   m_EditorClassIdentifier: 
-  taskId: 0
+  taskId: 2
   taskName: Output
   dialogueText: Hi
   theoryText: "\u0414\u043B\u044F \u0442\u043E\u0433\u043E \u0447\u0442\u043E\u0431\u044B

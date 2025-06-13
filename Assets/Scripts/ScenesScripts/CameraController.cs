@@ -22,14 +22,19 @@ public class CameraController2D : MonoBehaviour
     private bool isDragging = false;
     private Vector3 dragOrigin;
 
-    void Awake()
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Awake()
     {
         cam = GetComponent<Camera>();
-        fieldBounds = FindObjectOfType<FieldBounds>();
+        fieldBounds = FindFirstObjectByType<FieldBounds>();
         targetZoom = cam.orthographicSize;
     }
 
-    void Update()
+    private void Update()
     {
         HandleKeyboardPan();
         HandleMouseDrag();
@@ -63,6 +68,7 @@ public class CameraController2D : MonoBehaviour
             transform.position += diff * dragSpeed;
         }
     }
+
     private void HandleZoom()
     {
         float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
