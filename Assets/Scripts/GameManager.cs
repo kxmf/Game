@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     public int UnlockedFloorsCount { get; private set; }
 
     public int CurrentFloorIndex { get; private set; }
+
+    public Dictionary<string, TaskProgressData> tasksProgress = new();
 
     void Awake()
     {
@@ -48,27 +51,19 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
-    private void HandleEscapeKey()
+    public void InitializeTaskProgress(TaskData task)
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-        switch (currentSceneName)
+        if (!tasksProgress.ContainsKey(task.taskId))
         {
-            case "GameScene":
-                Debug.Log("Escape pressed on GameScene. Returning to Main Menu.");
-                LoadMainMenu();
-                break;
-            case "MainMenu":
-                UIManager.instance.OnBackButtonPressed();
-                Debug.Log("Escape pressed on MainMenu.");
-                break;
-
-            // case "SettingsScene":
-            //     LoadMainMenu();
-            //     break;
-
-            default:
-                break;
+            tasksProgress.Add(task.taskId, new TaskProgressData(task.taskId));
         }
+    }
+
+    public TaskProgressData GetTaskProgress(string taskId)
+    {
+        if (tasksProgress.TryGetValue(taskId, out TaskProgressData progress))
+            return progress;
+
+        return null;
     }
 }
