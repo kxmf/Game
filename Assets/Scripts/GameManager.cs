@@ -66,4 +66,34 @@ public class GameManager : MonoBehaviour
 
         return null;
     }
+
+    public void StartDialogueWithNPC(NPCData npcData)
+    {
+        var tasksToShow = new List<TaskData>();
+        foreach (var task in npcData.availableTasks)
+        {
+            TaskProgressData progress = GetTaskProgress(task.taskId);
+            if (
+                progress == null
+                || progress.status == TaskStatus.Available
+                || progress.status == TaskStatus.InProgress
+            )
+            {
+                tasksToShow.Add(task);
+            }
+        }
+
+        if (tasksToShow.Count > 0)
+        {
+            UIManager.instance.ShowDialogue(npcData, tasksToShow);
+        }
+        else
+            Debug.Log($"С NPC {npcData.npcName} сейчас не о чем говорить.");
+    }
+
+    public void StartTask(TaskData task)
+    {
+        Debug.Log($"Начинаем выполнение задачи '{task.taskName}'...");
+        // Например: UIManager.instance.ShowTaskWindow(task);
+    }
 }

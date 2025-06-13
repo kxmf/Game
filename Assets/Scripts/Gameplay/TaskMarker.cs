@@ -90,7 +90,7 @@ public class TaskMarker : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // GameManager.instance.StartDialogueWithNPC(npcData);
+        GameManager.instance.StartDialogueWithNPC(npcData);
     }
 
     private void OnMouseEnter()

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,9 @@ public class GameSceneView : MonoBehaviour
 
     [SerializeField]
     private Button settingsButton;
+
+    [SerializeField]
+    private DialogueWindow dialogueWindow;
 
     void Start()
     {
@@ -24,5 +28,12 @@ public class GameSceneView : MonoBehaviour
         backButton.onClick.AddListener(uiManager.OnGameSceneBackButtonPressed);
 
         settingsButton.onClick.AddListener(uiManager.OnSettingsButtonPressed);
+
+        dialogueWindow.Hide();
+    }
+
+    public void ShowDialogue(NPCData npcData, List<TaskData> tasks)
+    {
+        dialogueWindow.Show(npcData, tasks);
     }
 }

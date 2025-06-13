@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -94,5 +95,10 @@ public class UIManager : MonoBehaviour
     public void OnSettingsButtonPressed()
     {
         SceneManager.LoadScene("SettingsScene");
+    }
+
+    public void ShowDialogue(NPCData npcData, List<TaskData> tasks)
+    {
+        gameSceneView.ShowDialogue(npcData, tasks);
     }
 }
