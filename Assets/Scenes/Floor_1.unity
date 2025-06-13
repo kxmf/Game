@@ -479,7 +479,7 @@ MonoBehaviour:
   panSpeed: 150
   dragSpeed: 1
   scrollSpeed: 100
-  minZoom: 50
+  minZoom: 75
   maxZoom: 175
 --- !u!1001 &815616784
 PrefabInstance:

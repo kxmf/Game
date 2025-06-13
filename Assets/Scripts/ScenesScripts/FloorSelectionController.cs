@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class FloorSelectionController : MonoBehaviour
 {
     public Button[] floorsButtons;
-    public FloorData[] floors;
 
     private void Start()
     {

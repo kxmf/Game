@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Task", menuName = "My Game Data/Task")]
-public class TaskData : ScriptableObject
+public class MarkerData : ScriptableObject
 {
     [Header("General")]
     public string taskId;

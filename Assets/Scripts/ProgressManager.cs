@@ -1,46 +1,37 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class ProgressManager : MonoBehaviour
+public class SaveManager : MonoBehaviour
 {
-    public static ProgressManager Instance { get; private set; }
+    private const string UnlockedFloorsKey = "UnlockedFloors";
 
-    private HashSet<string> completedLevels = new();
+    public Dictionary<string, MarkerProgressData> tasksProgress = new();
 
-    private void Awake()
+    void Awake()
     {
-        if (Instance != null) { Destroy(gameObject); return; }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-        LoadProgress();
+        Debug.Log("SaveManager Initialized!");
     }
 
-    public bool IsLevelCompleted(string sceneName) => completedLevels.Contains(sceneName);
-
-    public void MarkLevelCompleted(string sceneName)
+    public void SaveProgress(int unlockedFloorsCount)
     {
-        if (completedLevels.Add(sceneName))
-            SaveProgress();
+        PlayerPrefs.SetInt(UnlockedFloorsKey, unlockedFloorsCount);
+        PlayerPrefs.Save();
+        Debug.Log($"Progress Saved! Unlocked floors: {unlockedFloorsCount}");
     }
 
-    private void LoadProgress()
+    public int LoadProgress()
     {
-        var json = PlayerPrefs.GetString("ProgressData", "{}");
-        completedLevels = JsonUtility.FromJson<SerializableSet>(json).ToHash();
+        if (!PlayerPrefs.HasKey(UnlockedFloorsKey))
+            return 0;
+
+        int unlockedFloors = PlayerPrefs.GetInt(UnlockedFloorsKey);
+        Debug.Log($"Progress Loaded! Unlocked floors: {unlockedFloors}");
+        return unlockedFloors;
     }
 
-    private void SaveProgress()
+    public void InitializeTaskProgress(MarkerData task)
     {
-        var json = JsonUtility.ToJson(new SerializableSet(completedLevels));
-        PlayerPrefs.SetString("ProgressData", json);
+        if (!tasksProgress.ContainsKey(task.taskId))
+            tasksProgress.Add(task.taskId, new MarkerProgressData(task.taskId));
     }
-}
-
-[System.Serializable]
-class SerializableSet
-{
-    public List<string> items;
-    public SerializableSet(HashSet<string> set) => items = set.ToList();
-    public HashSet<string> ToHash() => new(items);
 }
