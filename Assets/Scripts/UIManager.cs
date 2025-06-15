@@ -101,4 +101,14 @@ public class UIManager : MonoBehaviour
     {
         gameSceneView.ShowDialogue(npcData, tasks);
     }
+
+    public void ShowTaskWindow(TaskData task, string savedCode)
+    {
+        gameSceneView.ShowTask(task, savedCode);
+    }
+
+    public void HideTaskWindow()
+    {
+        gameSceneView.HideTask();
+    }
 }

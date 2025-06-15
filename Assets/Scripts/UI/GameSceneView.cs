@@ -14,6 +14,9 @@ public class GameSceneView : MonoBehaviour
     [SerializeField]
     private DialogueWindow dialogueWindow;
 
+    [SerializeField]
+    private TaskWindow taskWindow;
+
     void Start()
     {
         var uiManager = UIManager.instance;
@@ -30,10 +33,21 @@ public class GameSceneView : MonoBehaviour
         settingsButton.onClick.AddListener(uiManager.OnSettingsButtonPressed);
 
         dialogueWindow.Hide();
+        taskWindow.gameObject.SetActive(false);
     }
 
     public void ShowDialogue(NPCData npcData, List<TaskData> tasks)
     {
         dialogueWindow.Show(npcData, tasks);
+    }
+
+    public void ShowTask(TaskData task, string savedCode)
+    {
+        taskWindow.Show(task, savedCode);
+    }
+
+    public void HideTask()
+    {
+        taskWindow.gameObject.SetActive(false);
     }
 }

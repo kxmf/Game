@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -93,7 +94,48 @@ public class GameManager : MonoBehaviour
 
     public void StartTask(TaskData task)
     {
-        Debug.Log($"Начинаем выполнение задачи '{task.taskName}'...");
-        // Например: UIManager.instance.ShowTaskWindow(task);
+        TaskProgressData progress = GetTaskProgress(task.taskId);
+        string savedCode = (progress != null) ? progress.savedCode : "";
+
+        if (progress != null && progress.status == TaskStatus.Available)
+        {
+            progress.status = TaskStatus.InProgress;
+            // TODO: update icon
+        }
+
+        UIManager.instance.ShowTaskWindow(task, savedCode);
+    }
+
+    public void SaveTaskCode(string taskId, string code)
+    {
+        TaskProgressData progress = GetTaskProgress(taskId);
+        if (progress != null)
+        {
+            progress.savedCode = code;
+            Debug.Log($"Код для задачи {taskId} сохранен.");
+        }
+    }
+
+    public void CheckTaskSolution(
+        TaskData task,
+        string userCode,
+        Action<string, bool> onCheckCompleted
+    )
+    {
+        // bool isCorrect = userCode.Trim() == task.correctAnswer.Trim();
+        bool isCorrect = true;
+
+        string message;
+        if (isCorrect)
+        {
+            message = "> Task completed successfully!";
+            TaskProgressData progress = GetTaskProgress(task.taskId);
+            if (progress != null)
+                progress.status = TaskStatus.Completed;
+        }
+        else
+            message = "> Error: Incorrect solution. Please try again.";
+
+        onCheckCompleted?.Invoke(message, isCorrect);
     }
 }

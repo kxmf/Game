@@ -59,6 +59,6 @@ public class DialogueWindow : MonoBehaviour
 
         Hide();
 
-        // GameManager.instance.StartTask(selectedTask);
+        GameManager.instance.StartTask(selectedTask);
     }
 }
