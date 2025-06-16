@@ -23,8 +23,8 @@ public class PythonExecutor : MonoBehaviour
         {
             var pythonDll = Path.Combine(
                 Application.streamingAssetsPath,
-                "python",
-                "python310.dll"
+                "Python",
+                "python313.dll"
             );
 
             if (!File.Exists(pythonDll))

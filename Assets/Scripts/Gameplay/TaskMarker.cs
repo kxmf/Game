@@ -37,6 +37,7 @@ public class TaskMarker : MonoBehaviour
         }
 
         UpdateIcon();
+        GameManager.OnTaskStatusChanged += HandleTaskStatusChanged;
     }
 
     public void UpdateIcon()
@@ -64,22 +65,15 @@ public class TaskMarker : MonoBehaviour
         }
 
         if (hasAvailableTasks)
-        {
             spriteRenderer.sprite = availableSprite;
-            SetInteractable(true);
-        }
         else if (hasInProgressTasks)
-        {
             spriteRenderer.sprite = inProgressSprite;
-            SetInteractable(true);
-        }
         else if (completedTasksCount == npcData.availableTasks.Count)
-        {
             spriteRenderer.sprite = completedSprite;
-            SetInteractable(false);
-        }
         else
             gameObject.SetActive(false);
+
+        SetInteractable(true);
     }
 
     private void SetInteractable(bool interactable)
@@ -102,5 +96,23 @@ public class TaskMarker : MonoBehaviour
     private void OnMouseExit()
     {
         transform.localScale = Vector3.one;
+    }
+
+    private void HandleTaskStatusChanged(int changedTaskId)
+    {
+        if (npcData == null)
+            return;
+
+        foreach (var task in npcData.availableTasks)
+        {
+            if (task.taskId == changedTaskId)
+            {
+                Debug.Log(
+                    $"Маркер для NPC '{npcData.npcName}' услышал событие для задачи '{changedTaskId}' и обновляется."
+                );
+                UpdateIcon();
+                break;
+            }
+        }
     }
 }

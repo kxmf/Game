@@ -1,11 +1,11 @@
 [System.Serializable]
 public class TaskProgressData
 {
-    public string taskId;
+    public int taskId;
     public TaskStatus status;
     public string savedCode;
 
-    public TaskProgressData(string id)
+    public TaskProgressData(int id)
     {
         taskId = id;
         status = TaskStatus.Available;

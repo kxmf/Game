@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour
 
     public int CurrentFloorIndex { get; private set; }
 
-    public Dictionary<string, TaskProgressData> tasksProgress = new();
+    public Dictionary<int, TaskProgressData> tasksProgress = new();
+
+    public static event Action<int> OnTaskStatusChanged;
 
     void Awake()
     {
@@ -59,58 +61,62 @@ public class GameManager : MonoBehaviour
     public void InitializeTaskProgress(TaskData task)
     {
         if (!tasksProgress.ContainsKey(task.taskId))
-        {
             tasksProgress.Add(task.taskId, new TaskProgressData(task.taskId));
-        }
     }
 
-    public TaskProgressData GetTaskProgress(string taskId)
+    public TaskProgressData GetTaskProgress(int taskId)
     {
         if (tasksProgress.TryGetValue(taskId, out TaskProgressData progress))
+        {
             return progress;
+        }
+        else
+        {
+            Debug.Log(
+                $"<color=yellow>GAME MANAGER:</color> Прогресс для задачи '{taskId}' не найден. Создаю новую запись со статусом 'Available'."
+            );
 
-        return null;
+            var newProgress = new TaskProgressData(taskId);
+            tasksProgress.Add(taskId, newProgress);
+            return newProgress;
+        }
     }
 
     public void StartDialogueWithNPC(NPCData npcData)
     {
-        var tasksToShow = new List<TaskData>();
-        foreach (var task in npcData.availableTasks)
-        {
-            TaskProgressData progress = GetTaskProgress(task.taskId);
-            if (
-                progress == null
-                || progress.status == TaskStatus.Available
-                || progress.status == TaskStatus.InProgress
-            )
-            {
-                tasksToShow.Add(task);
-            }
-        }
+        // var tasksToShow = new List<TaskData>();
+        // foreach (var task in npcData.availableTasks)
+        // {
+        //     TaskProgressData progress = GetTaskProgress(task.taskId);
+        //     if (
+        //         progress == null
+        //         || progress.status == TaskStatus.Available
+        //         || progress.status == TaskStatus.InProgress
+        //     )
+        //     {
+        //         tasksToShow.Add(task);
+        //     }
+        // }
+        // For future
 
-        if (tasksToShow.Count > 0)
-        {
-            UIManager.instance.ShowDialogue(npcData, tasksToShow);
-        }
+        if (npcData.availableTasks.Count > 0)
+            UIManager.instance.ShowDialogue(npcData, npcData.availableTasks);
         else
             Debug.Log($"С NPC {npcData.npcName} сейчас не о чем говорить.");
     }
 
     public void StartTask(TaskData task)
     {
-        TaskProgressData progress = GetTaskProgress(task.taskId);
+        var progress = GetTaskProgress(task.taskId);
         string savedCode = (progress != null) ? progress.savedCode : "";
 
-        if (progress != null && progress.status == TaskStatus.Available)
-        {
-            progress.status = TaskStatus.InProgress;
-            // TODO: update icon
-        }
+        progress.status = TaskStatus.InProgress;
+        OnTaskStatusChanged?.Invoke(task.taskId);
 
         UIManager.instance.ShowTaskWindow(task, savedCode);
     }
 
-    public void SaveTaskCode(string taskId, string code)
+    public void SaveTaskCode(int taskId, string code)
     {
         TaskProgressData progress = GetTaskProgress(taskId);
         if (progress != null)
@@ -184,8 +190,11 @@ public class GameManager : MonoBehaviour
         if (isCorrect)
         {
             TaskProgressData progress = GetTaskProgress(task.taskId);
-            if (progress != null)
+            if (progress != null && progress.status != TaskStatus.Completed)
+            {
                 progress.status = TaskStatus.Completed;
+                OnTaskStatusChanged?.Invoke(task.taskId);
+            }
         }
 
         onCheckCompleted?.Invoke(finalMessage, isCorrect);

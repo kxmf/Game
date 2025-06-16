@@ -10,7 +10,7 @@ public enum CheckType
 public class TaskData : ScriptableObject
 {
     [Header("Основная информация")]
-    public string taskId;
+    public int taskId;
     public string taskName;
 
     [Header("Настройки проверки")]

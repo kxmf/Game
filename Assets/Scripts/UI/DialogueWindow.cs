@@ -54,9 +54,7 @@ public class DialogueWindow : MonoBehaviour
     private void OnTaskSelected(TaskData selectedTask)
     {
         Debug.Log($"Игрок выбрал задачу: {selectedTask.taskName}");
-
-        Hide();
-
         GameManager.instance.StartTask(selectedTask);
+        Hide();
     }
 }
