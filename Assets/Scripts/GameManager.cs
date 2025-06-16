@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Python.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private SaveManager saveManager;
+    private PythonExecutor pythonExecutor;
 
     public int UnlockedFloorsCount { get; private set; }
 
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         saveManager = GetComponent<SaveManager>();
+        pythonExecutor = GetComponent<PythonExecutor>();
 
         Debug.Log("GameManager Initialized!");
     }
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UnlockedFloorsCount = saveManager.LoadProgress();
+        pythonExecutor.Initialize();
 
         if (SceneManager.GetActiveScene().name == "InitScene")
             LoadMainMenu();

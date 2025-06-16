@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 1659364576}
   - component: {fileID: 1659364575}
   - component: {fileID: 1659364574}
+  - component: {fileID: 1659364578}
   m_Layer: 0
   m_Name: Init
   m_TagString: Untagged
@@ -150,12 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7db1239ee61cc448818fdd6f2fd8abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuPanel: {fileID: 0}
-  floorSelectionPanel: {fileID: 0}
-  floor0Button: {fileID: 0}
-  floor1Button: {fileID: 0}
-  floor2Button: {fileID: 0}
-  floor3Button: {fileID: 0}
 --- !u!114 &1659364575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +190,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1659364578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659364573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d437145816975994a87526b1bd3af4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
