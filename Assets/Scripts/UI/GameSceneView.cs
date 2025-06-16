@@ -17,6 +17,13 @@ public class GameSceneView : MonoBehaviour
     [SerializeField]
     private TaskWindow taskWindow;
 
+    [Header("Общие кнопки сцены")]
+    [SerializeField]
+    private GameObject backButtonObject;
+
+    [SerializeField]
+    private GameObject settingsButtonObject;
+
     void Start()
     {
         var uiManager = UIManager.instance;
@@ -43,11 +50,21 @@ public class GameSceneView : MonoBehaviour
 
     public void ShowTask(TaskData task, string savedCode)
     {
+        if (backButtonObject != null)
+            backButtonObject.SetActive(false);
+        if (settingsButtonObject != null)
+            settingsButtonObject.SetActive(false);
+
         taskWindow.Show(task, savedCode);
     }
 
     public void HideTask()
     {
+        if (backButtonObject != null)
+            backButtonObject.SetActive(true);
+        if (settingsButtonObject != null)
+            settingsButtonObject.SetActive(true);
+
         taskWindow.gameObject.SetActive(false);
     }
 }
