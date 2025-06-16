@@ -30,10 +30,8 @@ public class DialogueWindow : MonoBehaviour
     public void Show(NPCData npcData, List<TaskData> tasksToShow)
     {
         npcNameText.text = npcData.npcName;
-        // if (npcData.npcPortrait != null)
-        // {
-        //     npcPortraitImage.sprite = npcData.npcPortrait;
-        // }
+        if (npcData.npcPortrait != null)
+            npcPortraitImage.sprite = npcData.npcPortrait;
 
         foreach (Transform child in tasksContentParent)
             Destroy(child.gameObject);

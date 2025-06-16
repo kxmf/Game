@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4bbd7200598c44c8c9ad8e07c95555, type: 3}
   m_Name: NPC2
   m_EditorClassIdentifier: 
+  npcPortrait: {fileID: 5913908296879868772, guid: 6cc9d8a94041c5a45809b1cde986fe44, type: 3}
   npcName: Name2
   availableTasks:
   - {fileID: 11400000, guid: 310948e32451204488939755e7f23223, type: 2}
