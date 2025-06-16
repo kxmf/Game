@@ -6,6 +6,10 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 5f;
 
+    [Header("Настройки перетаскивания")]
+    [SerializeField]
+    public float dragSpeed = 1f;
+
     [Header("Настройки зума")]
     [SerializeField]
     private float zoomSpeed = 2f;
@@ -31,6 +35,9 @@ public class CameraController : MonoBehaviour
 
     private Camera cam;
 
+    private bool isDragging = false;
+    private Vector3 dragOrigin;
+
     void Start()
     {
         cam = GetComponent<Camera>();
@@ -38,9 +45,29 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        HandleMouseDrag();
         HandleMovement();
         HandleZoom();
         EnforceBounds();
+    }
+
+    private void HandleMouseDrag()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            isDragging = true;
+            dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
+        }
+
+        if (Input.GetMouseButtonUp(1))
+            isDragging = false;
+
+        if (isDragging)
+        {
+            Vector3 currentPoint = cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 diff = dragOrigin - currentPoint;
+            transform.position += diff * dragSpeed;
+        }
     }
 
     private void HandleMovement()
