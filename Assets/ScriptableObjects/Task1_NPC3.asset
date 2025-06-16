@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611530bcc722b3f4fbc1906041d7ceb6, type: 3}
   m_Name: Task1_NPC3
   m_EditorClassIdentifier: 
-  taskId: 0
-  taskName: 1) Vareable
+  taskId: 2
+  taskName: 1) Variables
   dialogueText: Hi
   theoryText: "\u0414\u043E \u044D\u0442\u043E\u0433\u043E \u043C\u043E\u043C\u0435\u043D\u0442\u0430
     \u0432\u0441\u0435 \u043D\u0430\u043F\u0438\u0441\u0430\u043D\u043D\u044B\u0435

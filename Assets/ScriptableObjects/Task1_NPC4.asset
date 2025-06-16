@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611530bcc722b3f4fbc1906041d7ceb6, type: 3}
   m_Name: Task1_NPC4
   m_EditorClassIdentifier: 
-  taskId: 0
+  taskId: 3
   taskName: 1) if else
   dialogueText: Hi
   theoryText: "\u041C\u044B \u0443\u0436\u0435 \u0443\u043C\u0435\u0435\u043C \u043F\u0438\u0441\u0430\u0442\u044C

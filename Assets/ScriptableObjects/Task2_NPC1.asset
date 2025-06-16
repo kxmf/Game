@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611530bcc722b3f4fbc1906041d7ceb6, type: 3}
   m_Name: Task2_NPC1
   m_EditorClassIdentifier: 
-  taskId: 1
+  taskId: 4
   taskName: 2) Output
   dialogueText: Hi
   theoryText: "\u0424\u0443\u043D\u043A\u0446\u0438\u044F print() \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442

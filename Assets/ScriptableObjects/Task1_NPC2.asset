@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611530bcc722b3f4fbc1906041d7ceb6, type: 3}
   m_Name: Task1_NPC2
   m_EditorClassIdentifier: 
-  taskId: 0
+  taskId: 1
   taskName: 1) Input
   dialogueText: Hi
   theoryText: "\u0414\u043B\u044F \u0441\u0447\u0438\u0442\u044B\u0432\u0430\u043D\u0438\u044F

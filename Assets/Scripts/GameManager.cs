@@ -126,20 +126,68 @@ public class GameManager : MonoBehaviour
         Action<string, bool> onCheckCompleted
     )
     {
-        // bool isCorrect = userCode.Trim() == task.correctAnswer.Trim();
-        bool isCorrect = true;
+        PythonExecutionResult initialRun = pythonExecutor.Execute(userCode);
+        if (!initialRun.Success)
+        {
+            onCheckCompleted?.Invoke(initialRun.Error, false);
+            return;
+        }
 
-        string message;
+        bool isCorrect = false;
+        string finalMessage = "";
+
+        if (task.checkType == CheckType.SimpleOutput)
+        {
+            string actualOutput = initialRun.Output.Trim();
+            string expected = task.expectedOutput.Trim();
+            isCorrect = actualOutput == expected;
+
+            if (isCorrect)
+                finalMessage = $"> Тест пройден!\nВывод:\n{actualOutput}";
+            else
+                finalMessage =
+                    $"> Тест не пройден.\nОжидалось:\n{expected}\nПолучено:\n{actualOutput}";
+        }
+        else if (task.checkType == CheckType.UnitTests)
+        {
+            try
+            {
+                using (Py.GIL())
+                {
+                    using (PyModule userModule = Py.CreateScope())
+                    {
+                        userModule.Exec(userCode);
+
+                        using (PyModule testModule = Py.CreateScope())
+                        {
+                            testModule.Set("user_module", userModule);
+                            testModule.Exec(task.unitTestCode);
+
+                            PyObject testResultTuple = testModule.InvokeMethod("run_tests");
+
+                            PyObject boolResult = testResultTuple.GetItem(0);
+                            PyObject stringResult = testResultTuple.GetItem(1);
+
+                            isCorrect = boolResult.As<bool>();
+                            finalMessage = stringResult.As<string>();
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                finalMessage = "Ошибка при запуске тестов: " + e.Message;
+                isCorrect = false;
+            }
+        }
+
         if (isCorrect)
         {
-            message = "> Task completed successfully!";
             TaskProgressData progress = GetTaskProgress(task.taskId);
             if (progress != null)
                 progress.status = TaskStatus.Completed;
         }
-        else
-            message = "> Error: Incorrect solution. Please try again.";
 
-        onCheckCompleted?.Invoke(message, isCorrect);
+        onCheckCompleted?.Invoke(finalMessage, isCorrect);
     }
 }
