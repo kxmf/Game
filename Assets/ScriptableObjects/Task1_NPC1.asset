@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Task1_NPC1
   m_EditorClassIdentifier: 
   taskId: 0
-  taskName: Output1
+  taskName: 1) Output
   dialogueText: Hi
   theoryText: "\u0414\u043B\u044F \u0442\u043E\u0433\u043E \u0447\u0442\u043E\u0431\u044B
     \u0432\u044B\u0432\u0435\u0441\u0442\u0438 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E
@@ -48,4 +48,4 @@ MonoBehaviour:
   assignmentText: "\u041D\u0430\u043F\u0438\u0448\u0438 \u043F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u0443,
     \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u0432\u044B\u0432\u043E\u0434\u0438\u0442
     \u043D\u0430 \u044D\u043A\u0440\u0430\u043D \u0441\u0442\u0440\u043E\u043A\u0443:\r\n\r\nHello,
-    my name is Python. Nice to meet you!\r\n\r"
+    my name is Python. Nice to meet you!\r\n"

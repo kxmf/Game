@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcName: Name3
   availableTasks:
-  - {fileID: 11400000, guid: 8d867c0985390e64288a13b9ea76e338, type: 2}
+  - {fileID: 11400000, guid: 27f92100c6ab1bf4ba3d5c4e251e48e8, type: 2}
+  - {fileID: 11400000, guid: 3d5e06d0f0731c44e83ac249544d3f76, type: 2}
+  - {fileID: 11400000, guid: a7ff14faff479ff48869edc7fd208afa, type: 2}

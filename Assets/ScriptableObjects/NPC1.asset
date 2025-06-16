@@ -15,3 +15,4 @@ MonoBehaviour:
   npcName: Name1
   availableTasks:
   - {fileID: 11400000, guid: 8d867c0985390e64288a13b9ea76e338, type: 2}
+  - {fileID: 11400000, guid: 1bd3a6732c24c854687d35740668ff91, type: 2}
