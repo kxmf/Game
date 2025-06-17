@@ -132,71 +132,56 @@ public class GameManager : MonoBehaviour
         Action<string, bool> onCheckCompleted
     )
     {
-        PythonExecutionResult initialRun = pythonExecutor.Execute(userCode);
-        if (!initialRun.Success)
+        if (task.TestCases == null || task.TestCases.Count == 0)
         {
-            onCheckCompleted?.Invoke(initialRun.Error, false);
+            onCheckCompleted?.Invoke(
+                "> Для этого задания нет тестов. Выполнено автоматически.",
+                true
+            );
+            MarkTaskAsCompleted(task.taskId);
             return;
         }
 
-        bool isCorrect = false;
-        string finalMessage = "";
-
-        if (task.checkType == CheckType.SimpleOutput)
+        for (int i = 0; i < task.TestCases.Count; i++)
         {
-            string actualOutput = initialRun.Output.Trim();
-            string expected = task.expectedOutput.Trim();
-            isCorrect = actualOutput == expected;
+            TestCase currentTest = task.TestCases[i];
 
-            if (isCorrect)
-                finalMessage = $"> Тест пройден!\nВывод:\n{actualOutput}";
-            else
-                finalMessage =
-                    $"> Тест не пройден.\nОжидалось:\n{expected}\nПолучено:\n{actualOutput}";
-        }
-        else if (task.checkType == CheckType.UnitTests)
-        {
-            try
+            var result = pythonExecutor.Execute(userCode, currentTest.InputData);
+
+            if (!result.Success)
             {
-                using (Py.GIL())
-                {
-                    using (PyModule userModule = Py.CreateScope())
-                    {
-                        userModule.Exec(userCode);
-
-                        using (PyModule testModule = Py.CreateScope())
-                        {
-                            testModule.Set("user_module", userModule);
-                            testModule.Exec(task.unitTestCode);
-
-                            PyObject testResultTuple = testModule.InvokeMethod("run_tests");
-
-                            PyObject boolResult = testResultTuple.GetItem(0);
-                            PyObject stringResult = testResultTuple.GetItem(1);
-
-                            isCorrect = boolResult.As<bool>();
-                            finalMessage = stringResult.As<string>();
-                        }
-                    }
-                }
+                string errorMessage = $"> Тест #{i + 1} провален с ошибкой:\n{result.Error}";
+                onCheckCompleted?.Invoke(errorMessage, false);
+                return;
             }
-            catch (Exception e)
+
+            string actualOutput = result.Output.Trim().Replace("\r\n", "\n");
+            string expectedOutput = currentTest.ExpectedOutput.Trim().Replace("\r\n", "\n");
+
+            if (actualOutput != expectedOutput)
             {
-                finalMessage = "Ошибка при запуске тестов: " + e.Message;
-                isCorrect = false;
+                string failureMessage =
+                    $"> Тест #{i + 1} провален.\n"
+                    + $"Входные данные:\n---\n{currentTest.InputData}\n---\n"
+                    + $"Ожидаемый вывод:\n---\n{expectedOutput}\n---\n"
+                    + $"Ваш вывод:\n---\n{actualOutput}\n---";
+                onCheckCompleted?.Invoke(failureMessage, false);
+                return;
             }
         }
 
-        if (isCorrect)
-        {
-            TaskProgressData progress = GetTaskProgress(task.taskId);
-            if (progress != null && progress.status != TaskStatus.Completed)
-            {
-                progress.status = TaskStatus.Completed;
-                OnTaskStatusChanged?.Invoke(task.taskId);
-            }
-        }
+        string successMessage = $"> Все {task.TestCases.Count} тестов пройдены успешно!";
+        onCheckCompleted?.Invoke(successMessage, true);
+        MarkTaskAsCompleted(task.taskId);
+    }
 
-        onCheckCompleted?.Invoke(finalMessage, isCorrect);
+    private void MarkTaskAsCompleted(int taskId)
+    {
+        TaskProgressData progress = GetTaskProgress(taskId);
+        if (progress != null && progress.status != TaskStatus.Completed)
+        {
+            progress.status = TaskStatus.Completed;
+            OnTaskStatusChanged?.Invoke(taskId);
+        }
     }
 }

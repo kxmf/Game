@@ -49,15 +49,13 @@ public class PythonExecutor : MonoBehaviour
         }
     }
 
-    public PythonExecutionResult Execute(string code)
+    public PythonExecutionResult Execute(string code, string inputData = "")
     {
         if (!isInitialized)
         {
             Initialize();
             if (!isInitialized)
-            {
                 return new PythonExecutionResult { Error = "Python Engine не инициализирован." };
-            }
         }
 
         var result = new PythonExecutionResult();
@@ -71,6 +69,10 @@ public class PythonExecutor : MonoBehaviour
 
                 scope.Set("stdout_redirector", outputRedirector.ToPython());
 
+                var inputReader = new StringReader(inputData ?? "");
+                var inputRedirector = new PyInputStream(inputReader);
+                scope.Set("stdin_redirector", inputRedirector.ToPython());
+
                 try
                 {
                     scope.Exec(
@@ -78,6 +80,7 @@ public class PythonExecutor : MonoBehaviour
 import sys
 sys.stdout = stdout_redirector
 sys.stderr = stdout_redirector
+sys.stdin = stdin_redirector
 "
                     );
                     scope.Exec(code);
@@ -103,6 +106,22 @@ sys.stderr = stdout_redirector
             PythonEngine.Shutdown();
             Debug.Log("Python Engine Shutdown.");
         }
+    }
+}
+
+[PyExport(true)]
+public class PyInputStream
+{
+    private readonly StringReader reader;
+
+    public PyInputStream(StringReader reader)
+    {
+        this.reader = reader;
+    }
+
+    public string readline()
+    {
+        return reader.ReadLine() ?? "";
     }
 }
 
