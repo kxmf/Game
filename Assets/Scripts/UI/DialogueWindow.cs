@@ -38,9 +38,12 @@ public class DialogueWindow : MonoBehaviour
 
         foreach (var task in tasksToShow)
         {
+            TaskProgressData progress = GameManager.instance.GetTaskProgress(task.taskId);
+
             GameObject buttonGO = Instantiate(taskButtonPrefab, tasksContentParent);
             TaskButton taskButton = buttonGO.GetComponent<TaskButton>();
-            taskButton.Setup(task, OnTaskSelected);
+
+            taskButton.Setup(task, progress.status, OnTaskSelected);
         }
 
         gameObject.SetActive(true);

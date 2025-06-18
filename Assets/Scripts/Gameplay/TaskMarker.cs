@@ -63,32 +63,37 @@ public class TaskMarker : MonoBehaviour
             return;
         }
 
-        bool hasAvailableTasks = false;
-        bool hasInProgressTasks = false;
-        int completedTasksCount = 0;
+        int availableCount = 0;
+        int inProgressCount = 0;
+        int completedCount = 0;
+        int totalTasks = npcData.availableTasks.Count;
 
         foreach (var task in npcData.availableTasks)
         {
-            TaskProgressData progress = GameManager.instance.GetTaskProgress(task.taskId);
+            var progress = GameManager.instance.GetTaskProgress(task.taskId);
 
-            if (progress == null || progress.status == TaskStatus.Available)
-                hasAvailableTasks = true;
-            else if (progress.status == TaskStatus.InProgress)
-                hasInProgressTasks = true;
-            else if (progress.status == TaskStatus.Completed)
-                completedTasksCount++;
+            switch (progress.status)
+            {
+                case TaskStatus.Available:
+                    availableCount++;
+                    break;
+                case TaskStatus.InProgress:
+                    inProgressCount++;
+                    break;
+                case TaskStatus.Completed:
+                    completedCount++;
+                    break;
+            }
         }
 
-        if (hasAvailableTasks)
-            spriteRenderer.sprite = availableSprite;
-        else if (hasInProgressTasks)
-            spriteRenderer.sprite = inProgressSprite;
-        else if (completedTasksCount == npcData.availableTasks.Count)
-            spriteRenderer.sprite = completedSprite;
-        else
-            gameObject.SetActive(false);
-
         SetInteractable(true);
+
+        if (completedCount == totalTasks)
+            spriteRenderer.sprite = completedSprite;
+        else if (inProgressCount > 0 || completedCount > 0)
+            spriteRenderer.sprite = inProgressSprite;
+        else
+            spriteRenderer.sprite = availableSprite;
     }
 
     private void SetInteractable(bool interactable)

@@ -197,14 +197,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.12941177, g: 0.6156863, b: 0.91764706, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 5, y: 5, z: 5, w: 5}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 31bf5827722aab849858a921b84b4ef0, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -254,7 +254,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 4582891155407898611}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -271,3 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskNameText: {fileID: 5739180383688190015}
+  buttonBackground: {fileID: 4582891155407898611}
+  availableSprite: {fileID: 21300000, guid: 31bf5827722aab849858a921b84b4ef0, type: 3}
+  inProgressSprite: {fileID: 21300000, guid: 1fb7aed6aefa3064e9a25162c331809e, type: 3}
+  completedSprite: {fileID: 21300000, guid: 79b9cf45bab3ea84682ef05bd92fd6b2, type: 3}
