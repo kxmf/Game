@@ -8,6 +8,9 @@ public class TaskData : ScriptableObject
     public int taskId;
     public string taskName;
 
+    [Header("Требования для разблокировки")]
+    public List<int> prerequisiteTaskIds = new();
+
     [Header("Настройки автопроверки")]
     public List<TestCase> TestCases = new();
 
@@ -20,7 +23,4 @@ public class TaskData : ScriptableObject
 
     [TextArea(10, 20)]
     public string assignmentText;
-
-    [Header("Требования для разблокировки")]
-    public List<int> prerequisiteTaskIds = new();
 }

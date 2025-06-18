@@ -24,21 +24,43 @@ public class TaskButton : MonoBehaviour
     private Button button;
     private TaskData associatedTask;
     private Action<TaskData> onTaskSelectedCallback;
+    private bool isInitialized = false;
 
     void Awake()
     {
+        InitializeButton();
+    }
+
+    private void InitializeButton()
+    {
+        if (isInitialized)
+            return;
+
         button = GetComponent<Button>();
-        button.onClick.AddListener(OnButtonClicked);
+        if (button != null)
+        {
+            button.onClick.AddListener(OnButtonClicked);
+            isInitialized = true;
+        }
+        else
+            Debug.LogError("На префабе TaskButton не найден компонент Button!", gameObject);
     }
 
     public void Setup(TaskData taskData, TaskStatus status, Action<TaskData> callback)
     {
+        InitializeButton();
+
         associatedTask = taskData;
         onTaskSelectedCallback = callback;
         taskNameText.text = taskData.taskName;
+        button.interactable = true;
 
         switch (status)
         {
+            case TaskStatus.NotAvailable:
+                button.interactable = false;
+                // button.gameObject.SetActive(false);
+                break;
             case TaskStatus.Available:
                 buttonBackground.sprite = availableSprite;
                 break;

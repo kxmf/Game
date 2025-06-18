@@ -11,6 +11,9 @@ public class TaskMarker : MonoBehaviour
 
     [Header("Спрайты состояний")]
     [SerializeField]
+    private Sprite notAvailableSprite;
+
+    [SerializeField]
     private Sprite availableSprite;
 
     [SerializeField]
@@ -63,6 +66,7 @@ public class TaskMarker : MonoBehaviour
             return;
         }
 
+        int notAvailableCount = 0;
         int availableCount = 0;
         int inProgressCount = 0;
         int completedCount = 0;
@@ -70,10 +74,13 @@ public class TaskMarker : MonoBehaviour
 
         foreach (var task in npcData.availableTasks)
         {
-            var progress = GameManager.instance.GetTaskProgress(task.taskId);
+            var progress = GameManager.instance.GetTaskProgressData(task.taskId);
 
             switch (progress.status)
             {
+                case TaskStatus.NotAvailable:
+                    notAvailableCount++;
+                    break;
                 case TaskStatus.Available:
                     availableCount++;
                     break;
@@ -92,14 +99,18 @@ public class TaskMarker : MonoBehaviour
             spriteRenderer.sprite = completedSprite;
         else if (inProgressCount > 0 || completedCount > 0)
             spriteRenderer.sprite = inProgressSprite;
-        else
+        else if (availableCount > 0)
             spriteRenderer.sprite = availableSprite;
+        else
+        {
+            SetInteractable(false);
+            spriteRenderer.sprite = notAvailableSprite;
+        }
     }
 
     private void SetInteractable(bool interactable)
     {
         myCollider.enabled = interactable;
-        gameObject.SetActive(interactable);
     }
 
     private void OnMouseDown()

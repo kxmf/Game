@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         UnlockedFloorsCount = saveManager.LoadProgress();
         TasksProgress = saveManager.LoadTaskProgress();
+        UpdateAllTasksAvailability();
         pythonExecutor.Initialize();
 
         if (SceneManager.GetActiveScene().name == "InitScene")
@@ -79,13 +80,60 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(previousSceneName);
     }
 
+    public void ResetGameProgress()
+    {
+        Debug.LogWarning("Инициирован полный сброс прогресса...");
+
+                TasksProgress.Clear();
+        UnlockedFloorsCount = 0;
+
+        SceneManager.LoadScene("InitScene");
+
+        if (saveManager != null)
+            saveManager.DeleteAllSaveData();
+    }
+
+    public bool ArePrerequisitesMet(TaskData task)
+    {
+        if (task.prerequisiteTaskIds == null || task.prerequisiteTaskIds.Count == 0)
+            return true;
+
+        foreach (int reqId in task.prerequisiteTaskIds)
+        {
+            var reqProgress = GetTaskProgressData(reqId);
+            if (reqProgress.status != TaskStatus.Completed)
+                return false;
+        }
+
+        return true;
+    }
+
+    public void UpdateAllTasksAvailability()
+    {
+        var allTasks = Resources.LoadAll<TaskData>("Tasks");
+
+        foreach (var task in allTasks)
+        {
+            TaskProgressData progress = GetTaskProgressData(task.taskId);
+            if (progress.status == TaskStatus.NotAvailable)
+            {
+                if (ArePrerequisitesMet(task))
+                {
+                    progress.status = TaskStatus.Available;
+                    Debug.Log($"Задача '{task.taskName}' стала доступна!");
+                    OnTaskStatusChanged?.Invoke(task.taskId);
+                }
+            }
+        }
+    }
+
     public void InitializeTaskProgress(TaskData task)
     {
         if (!TasksProgress.ContainsKey(task.taskId))
             TasksProgress.Add(task.taskId, new TaskProgressData(task.taskId));
     }
 
-    public TaskProgressData GetTaskProgress(int taskId)
+    public TaskProgressData GetTaskProgressData(int taskId)
     {
         if (TasksProgress.TryGetValue(taskId, out TaskProgressData progress))
         {
@@ -128,7 +176,7 @@ public class GameManager : MonoBehaviour
 
     public void StartTask(TaskData task)
     {
-        var progress = GetTaskProgress(task.taskId);
+        var progress = GetTaskProgressData(task.taskId);
         string savedCode = (progress != null) ? progress.savedCode : "";
 
         progress.status = TaskStatus.InProgress;
@@ -139,7 +187,7 @@ public class GameManager : MonoBehaviour
 
     public void SaveTaskCode(int taskId, string code)
     {
-        TaskProgressData progress = GetTaskProgress(taskId);
+        TaskProgressData progress = GetTaskProgressData(taskId);
         if (progress != null)
         {
             progress.savedCode = code;
@@ -198,11 +246,12 @@ public class GameManager : MonoBehaviour
 
     private void MarkTaskAsCompleted(int taskId)
     {
-        TaskProgressData progress = GetTaskProgress(taskId);
+        TaskProgressData progress = GetTaskProgressData(taskId);
         if (progress != null && progress.status != TaskStatus.Completed)
         {
             progress.status = TaskStatus.Completed;
             OnTaskStatusChanged?.Invoke(taskId);
+            UpdateAllTasksAvailability();
         }
     }
 

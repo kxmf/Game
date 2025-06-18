@@ -9,4 +9,12 @@ public class SettingsSceneController : MonoBehaviour
         else
             Debug.LogError("GameManager не найден! Не могу вернуться назад.");
     }
+
+    public void ResetProgress()
+    {
+        if (GameManager.instance != null)
+            GameManager.instance.ResetGameProgress();
+        else
+            Debug.LogError("GameManager не найден! Не могу сбросить прогресс.");
+    }
 }

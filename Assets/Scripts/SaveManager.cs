@@ -55,9 +55,7 @@ public class SaveManager : MonoBehaviour
         string json = JsonUtility.ToJson(collection);
 
         PlayerPrefs.SetString(TaskProgressKey, json);
-        Debug.Log(
-            $"<SAVE MANAGER: Сохранено {collection.entries.Count} записей о прогрессе задач."
-        );
+        Debug.Log($"SAVE MANAGER: Сохранено {collection.entries.Count} записей о прогрессе задач.");
     }
 
     public Dictionary<int, TaskProgressData> LoadTaskProgress()
@@ -73,9 +71,7 @@ public class SaveManager : MonoBehaviour
             foreach (var entry in collection.entries)
                 loadedProgress[entry.taskId] = entry.progressData;
 
-            Debug.Log(
-                $"<SAVE MANAGER: Загружено {loadedProgress.Count} записей о прогрессе задач."
-            );
+            Debug.Log($"SAVE MANAGER: Загружено {loadedProgress.Count} записей о прогрессе задач.");
         }
         else
         {
@@ -85,5 +81,13 @@ public class SaveManager : MonoBehaviour
         }
 
         return loadedProgress;
+    }
+
+    public void DeleteAllSaveData()
+    {
+        PlayerPrefs.DeleteKey(UnlockedFloorsKey);
+        PlayerPrefs.DeleteKey(TaskProgressKey);
+
+        Debug.LogWarning("SAVE MANAGER: Все данные сохранения были удалены!");
     }
 }

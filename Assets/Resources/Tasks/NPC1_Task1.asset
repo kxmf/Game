@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 611530bcc722b3f4fbc1906041d7ceb6, type: 3}
-  m_Name: Task1_NPC1
+  m_Name: NPC1_Task1
   m_EditorClassIdentifier: 
   taskId: 0
   taskName: 1) Output
