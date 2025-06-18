@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public int CurrentFloorIndex { get; private set; }
 
-    public Dictionary<int, TaskProgressData> tasksProgress = new();
+    public Dictionary<int, TaskProgressData> TasksProgress;
     private string previousSceneName;
 
     public static event Action<int> OnTaskStatusChanged;
@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UnlockedFloorsCount = saveManager.LoadProgress();
+        TasksProgress = saveManager.LoadTaskProgress();
         pythonExecutor.Initialize();
 
         if (SceneManager.GetActiveScene().name == "InitScene")
@@ -80,13 +81,13 @@ public class GameManager : MonoBehaviour
 
     public void InitializeTaskProgress(TaskData task)
     {
-        if (!tasksProgress.ContainsKey(task.taskId))
-            tasksProgress.Add(task.taskId, new TaskProgressData(task.taskId));
+        if (!TasksProgress.ContainsKey(task.taskId))
+            TasksProgress.Add(task.taskId, new TaskProgressData(task.taskId));
     }
 
     public TaskProgressData GetTaskProgress(int taskId)
     {
-        if (tasksProgress.TryGetValue(taskId, out TaskProgressData progress))
+        if (TasksProgress.TryGetValue(taskId, out TaskProgressData progress))
         {
             return progress;
         }
@@ -97,7 +98,7 @@ public class GameManager : MonoBehaviour
             );
 
             var newProgress = new TaskProgressData(taskId);
-            tasksProgress.Add(taskId, newProgress);
+            TasksProgress.Add(taskId, newProgress);
             return newProgress;
         }
     }
@@ -203,5 +204,13 @@ public class GameManager : MonoBehaviour
             progress.status = TaskStatus.Completed;
             OnTaskStatusChanged?.Invoke(taskId);
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (saveManager != null && TasksProgress != null)
+            saveManager.SaveTaskProgress(TasksProgress);
+
+        // saveManager.SaveProgress(UnlockedFloorsCount);
     }
 }
