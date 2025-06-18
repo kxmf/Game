@@ -57,10 +57,6 @@ public class TaskButton : MonoBehaviour
 
         switch (status)
         {
-            case TaskStatus.NotAvailable:
-                button.interactable = false;
-                // button.gameObject.SetActive(false);
-                break;
             case TaskStatus.Available:
                 buttonBackground.sprite = availableSprite;
                 break;

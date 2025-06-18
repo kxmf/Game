@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskId: 9
   taskName: 2) Conditions
-  prerequisiteTaskIds: 050000000600000007000000
+  prerequisiteTaskIds: 08000000
   TestCases: []
   dialogueText: Hi
   theoryText: "\u041E\u0431\u0440\u0430\u0442\u0438 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435:

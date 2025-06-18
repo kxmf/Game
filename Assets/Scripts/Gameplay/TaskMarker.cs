@@ -24,6 +24,7 @@ public class TaskMarker : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Collider2D myCollider;
+    private bool accessable = true;
 
     void Start()
     {
@@ -93,7 +94,7 @@ public class TaskMarker : MonoBehaviour
             }
         }
 
-        SetInteractable(true);
+        accessable = true;
 
         if (completedCount == totalTasks)
             spriteRenderer.sprite = completedSprite;
@@ -103,19 +104,14 @@ public class TaskMarker : MonoBehaviour
             spriteRenderer.sprite = availableSprite;
         else
         {
-            SetInteractable(false);
+            accessable = false;
             spriteRenderer.sprite = notAvailableSprite;
         }
     }
 
-    private void SetInteractable(bool interactable)
-    {
-        myCollider.enabled = interactable;
-    }
-
     private void OnMouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.IsPointerOverGameObject() || !accessable)
             return;
         GameManager.instance.StartDialogueWithNPC(npcData);
     }

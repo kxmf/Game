@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskId: 2
   taskName: 1) Input
-  prerequisiteTaskIds: 0000000001000000
+  prerequisiteTaskIds: 01000000
   TestCases:
   - InputData: 160
     ExpectedOutput: "\u0422\u0432\u043E\u0439 \u0440\u043E\u0441\u0442 - 160 \u0441\u043C!"

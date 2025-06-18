@@ -84,13 +84,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.LogWarning("Инициирован полный сброс прогресса...");
 
-                TasksProgress.Clear();
-        UnlockedFloorsCount = 0;
-
-        SceneManager.LoadScene("InitScene");
-
         if (saveManager != null)
             saveManager.DeleteAllSaveData();
+
+        TasksProgress.Clear();
+        UnlockedFloorsCount = 0;
+
+        Application.Quit();
     }
 
     public bool ArePrerequisitesMet(TaskData task)
@@ -153,23 +153,16 @@ public class GameManager : MonoBehaviour
 
     public void StartDialogueWithNPC(NPCData npcData)
     {
-        // var tasksToShow = new List<TaskData>();
-        // foreach (var task in npcData.availableTasks)
-        // {
-        //     TaskProgressData progress = GetTaskProgress(task.taskId);
-        //     if (
-        //         progress == null
-        //         || progress.status == TaskStatus.Available
-        //         || progress.status == TaskStatus.InProgress
-        //     )
-        //     {
-        //         tasksToShow.Add(task);
-        //     }
-        // }
-        // For future
+        var tasksToShow = new List<TaskData>();
+        foreach (var task in npcData.availableTasks)
+        {
+            var progress = GetTaskProgressData(task.taskId);
+            if (progress.status != TaskStatus.NotAvailable)
+                tasksToShow.Add(task);
+        }
 
         if (npcData.availableTasks.Count > 0)
-            UIManager.instance.ShowDialogue(npcData, npcData.availableTasks);
+            UIManager.instance.ShowDialogue(npcData, tasksToShow);
         else
             Debug.Log($"С NPC {npcData.npcName} сейчас не о чем говорить.");
     }
