@@ -1474,7 +1474,8 @@ MonoBehaviour:
   floor2Button: {fileID: 1768666330}
   floor3Button: {fileID: 879487022}
   startButton: {fileID: 1621040040}
-  settingsButton: {fileID: 1424132755}
+  settingsButton_MainPanel: {fileID: 1424132755}
+  settingsButton_FloorPanel: {fileID: 742060216}
   quitButton: {fileID: 1378301270}
   backButton: {fileID: 1782832459}
 --- !u!1 &1378301268

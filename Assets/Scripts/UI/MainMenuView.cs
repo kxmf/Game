@@ -27,7 +27,10 @@ public class MainMenuView : MonoBehaviour
     private Button startButton;
 
     [SerializeField]
-    private Button settingsButton;
+    private Button settingsButton_MainPanel;
+
+    [SerializeField]
+    private Button settingsButton_FloorPanel;
 
     [SerializeField]
     private Button quitButton;
@@ -47,9 +50,10 @@ public class MainMenuView : MonoBehaviour
         uiManager.RegisterMainMenuView(this);
 
         startButton.onClick.AddListener(uiManager.OnStartButtonPressed);
-        settingsButton.onClick.AddListener(uiManager.OnSettingsButtonPressed);
+        settingsButton_MainPanel.onClick.AddListener(uiManager.OnSettingsButtonPressed);
         quitButton.onClick.AddListener(uiManager.OnQuitButtonPressed);
         backButton.onClick.AddListener(uiManager.OnBackButtonPressed);
+        settingsButton_FloorPanel.onClick.AddListener(uiManager.OnSettingsButtonPressed);
 
         floor0Button.onClick.AddListener(() => uiManager.OnFloorButtonPressed(0));
         floor1Button.onClick.AddListener(() => uiManager.OnFloorButtonPressed(1));
