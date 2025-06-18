@@ -24,7 +24,7 @@ public class DialogueWindow : MonoBehaviour
 
     void Awake()
     {
-        closeButton.onClick.AddListener(Hide);
+        closeButton.onClick.AddListener(() => UIManager.instance.HideDialogueWindow());
     }
 
     public void Show(NPCData npcData, List<TaskData> tasksToShow)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,8 @@ public class UIManager : MonoBehaviour
         Main,
         FloorSelection,
     }
+
+    public static event Action<bool> OnUIStateChanged;
 
     private MainMenuState targetStateOnLoad = MainMenuState.Main;
 
@@ -99,16 +102,25 @@ public class UIManager : MonoBehaviour
 
     public void ShowDialogue(NPCData npcData, List<TaskData> tasks)
     {
+        OnUIStateChanged?.Invoke(true);
         gameSceneView.ShowDialogue(npcData, tasks);
+    }
+
+    public void HideDialogueWindow()
+    {
+        gameSceneView.HideDialogue();
+        OnUIStateChanged?.Invoke(false);
     }
 
     public void ShowTaskWindow(TaskData task, string savedCode)
     {
+        OnUIStateChanged?.Invoke(true);
         gameSceneView.ShowTask(task, savedCode);
     }
 
     public void HideTaskWindow()
     {
         gameSceneView.HideTask();
+        OnUIStateChanged?.Invoke(false);
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class CameraController : MonoBehaviour
 
     [Header("Настройки перетаскивания")]
     [SerializeField]
-    public float dragSpeed = 1f;
+    private float dragSpeed = 1f;
 
     [Header("Настройки зума")]
     [SerializeField]
@@ -37,6 +38,7 @@ public class CameraController : MonoBehaviour
 
     private bool isDragging = false;
     private Vector3 dragOrigin;
+    private bool isInputLocked = false;
 
     void Start()
     {
@@ -45,15 +47,35 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (isInputLocked)
+            return;
+
         HandleMouseDrag();
         HandleMovement();
         HandleZoom();
         EnforceBounds();
     }
 
+    private void OnEnable()
+    {
+        UIManager.OnUIStateChanged += HandleUIStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        UIManager.OnUIStateChanged -= HandleUIStateChanged;
+    }
+
+    private void HandleUIStateChanged(bool isLocked)
+    {
+        isInputLocked = isLocked;
+        if (isLocked)
+            isDragging = false;
+    }
+
     private void HandleMouseDrag()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
         {
             isDragging = true;
             dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);

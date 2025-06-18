@@ -39,13 +39,18 @@ public class GameSceneView : MonoBehaviour
 
         settingsButton.onClick.AddListener(uiManager.OnSettingsButtonPressed);
 
-        dialogueWindow.Hide();
+        UIManager.instance.HideDialogueWindow();
         taskWindow.gameObject.SetActive(false);
     }
 
     public void ShowDialogue(NPCData npcData, List<TaskData> tasks)
     {
         dialogueWindow.Show(npcData, tasks);
+    }
+
+    public void HideDialogue()
+    {
+        dialogueWindow.Hide();
     }
 
     public void ShowTask(TaskData task, string savedCode)
