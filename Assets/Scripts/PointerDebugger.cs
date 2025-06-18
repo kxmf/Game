@@ -6,7 +6,7 @@ public class PointerDebugger : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log(
-            $"<color=red>Клик перехвачен UI-элементом: {eventData.pointerCurrentRaycast.gameObject.name}</color>",
+            $"Клик перехвачен UI-элементом: {eventData.pointerCurrentRaycast.gameObject.name}",
             eventData.pointerCurrentRaycast.gameObject
         );
     }

@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log(
-                $"<color=yellow>GAME MANAGER:</color> Прогресс для задачи '{taskId}' не найден. Создаю новую запись со статусом 'Available'."
+                $"GAME MANAGER: Прогресс для задачи '{taskId}' не найден. Создаю новую запись со статусом 'Available'."
             );
 
             var newProgress = new TaskProgressData(taskId);

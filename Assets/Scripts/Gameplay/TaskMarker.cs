@@ -38,7 +38,21 @@ public class TaskMarker : MonoBehaviour
         }
 
         UpdateIcon();
+    }
+
+    private void OnEnable()
+    {
         GameManager.OnTaskStatusChanged += HandleTaskStatusChanged;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnTaskStatusChanged -= HandleTaskStatusChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnTaskStatusChanged -= HandleTaskStatusChanged;
     }
 
     public void UpdateIcon()
