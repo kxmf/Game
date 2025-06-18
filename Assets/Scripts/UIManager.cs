@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
         FloorSelection,
     }
 
+    private bool isFloorSelectionVisible = false;
+
     public static event Action<bool> OnUIStateChanged;
 
     private MainMenuState targetStateOnLoad = MainMenuState.Main;
@@ -64,6 +66,7 @@ public class UIManager : MonoBehaviour
             return;
         mainMenuView.ShowFloorSelection();
         mainMenuView.UpdateFloorButtons(GameManager.instance.UnlockedFloorsCount);
+        isFloorSelectionVisible = true;
     }
 
     public void OnFloorButtonPressed(int floorIndex)
@@ -87,6 +90,7 @@ public class UIManager : MonoBehaviour
         if (mainMenuView == null)
             return;
         mainMenuView.ShowMainMenu();
+        isFloorSelectionVisible = false;
     }
 
     public void OnGameSceneBackButtonPressed()
@@ -97,7 +101,15 @@ public class UIManager : MonoBehaviour
 
     public void OnSettingsButtonPressed()
     {
-        SceneManager.LoadScene("SettingsScene");
+        if (SceneManager.GetActiveScene().name == "MenuScene")
+        {
+            if (isFloorSelectionVisible)
+                SetTargetMainMenuState(MainMenuState.FloorSelection);
+            else
+                SetTargetMainMenuState(MainMenuState.Main);
+        }
+
+        GameManager.instance.GoToSettings();
     }
 
     public void ShowDialogue(NPCData npcData, List<TaskData> tasks)

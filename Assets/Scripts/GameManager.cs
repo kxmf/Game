@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Python.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int CurrentFloorIndex { get; private set; }
 
     public Dictionary<int, TaskProgressData> tasksProgress = new();
+    private string previousSceneName;
 
     public static event Action<int> OnTaskStatusChanged;
 
@@ -56,6 +56,26 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Loading Game Scene for floor {floorIndex}...");
         CurrentFloorIndex = floorIndex;
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void GoToSettings()
+    {
+        previousSceneName = SceneManager.GetActiveScene().name;
+        Debug.Log($"Переходим в настройки. Запомненная сцена: {previousSceneName}");
+        SceneManager.LoadScene("SettingsScene");
+    }
+
+    public void ReturnFromSettings()
+    {
+        if (string.IsNullOrEmpty(previousSceneName))
+        {
+            Debug.LogWarning("Предыдущая сцена не была запомнена. Возврат в главное меню.");
+            LoadMainMenu();
+            return;
+        }
+
+        Debug.Log($"Возвращаемся на сцену: {previousSceneName}");
+        SceneManager.LoadScene(previousSceneName);
     }
 
     public void InitializeTaskProgress(TaskData task)
