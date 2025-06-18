@@ -30,8 +30,8 @@ public class TaskMarker : MonoBehaviour
         if (npcData == null)
         {
             Debug.LogError(
-                $"На маркере '{this.gameObject.name}' не назначены данные NPC (NPCData)!",
-                this.gameObject
+                $"На маркере '{gameObject.name}' не назначены данные NPC (NPCData)!",
+                gameObject
             );
             gameObject.SetActive(false);
             return;

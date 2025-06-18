@@ -86,7 +86,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &6961033297486997074
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf8e59555884b8409b5c58112832b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskData: {fileID: 0}
-  availableSprite: {fileID: 21300000, guid: b380abd458433ad459dfd30f8b1bbb50, type: 3}
-  inProgressSprite: {fileID: 21300000, guid: 77f83f1c7b2705247ae79d1221129265, type: 3}
-  completedSprite: {fileID: 21300000, guid: 1fd2662fe11b40647b6fd5113e1d2a25, type: 3}
+  npcData: {fileID: 0}
+  availableSprite: {fileID: 21300000, guid: 09f020dd13408a44cbf6577402b31bd9, type: 3}
+  inProgressSprite: {fileID: 21300000, guid: a20dd757bc687894db8819c7e8d799c3, type: 3}
+  completedSprite: {fileID: 21300000, guid: 6728ae66727bb9c409c2b16f4c833b4a, type: 3}

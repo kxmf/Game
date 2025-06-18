@@ -9,8 +9,7 @@ public class TaskData : ScriptableObject
     public string taskName;
 
     [Header("Настройки автопроверки")]
-    [Tooltip("Список тестов для проверки кода. Код будет запущен для каждого теста.")]
-    public List<TestCase> TestCases = new List<TestCase>();
+    public List<TestCase> TestCases = new();
 
     [Header("Контент")]
     [TextArea(3, 10)]
@@ -21,4 +20,7 @@ public class TaskData : ScriptableObject
 
     [TextArea(10, 20)]
     public string assignmentText;
+
+    [Header("Требования для разблокировки")]
+    public List<int> prerequisiteTaskIds = new();
 }

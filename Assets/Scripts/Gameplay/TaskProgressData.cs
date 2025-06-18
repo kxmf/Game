@@ -8,13 +8,14 @@ public class TaskProgressData
     public TaskProgressData(int id)
     {
         taskId = id;
-        status = TaskStatus.Available;
+        status = TaskStatus.NotAvailable;
         savedCode = "";
     }
 }
 
 public enum TaskStatus
 {
+    NotAvailable,
     Available,
     InProgress,
     Completed,
