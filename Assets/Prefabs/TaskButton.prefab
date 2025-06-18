@@ -68,7 +68,7 @@ MonoBehaviour:
   m_text: Button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f09824eb65dc51a44a1027ca88c8cc56, type: 2}
-  m_sharedMaterial: {fileID: -3799575118940180152, guid: f09824eb65dc51a44a1027ca88c8cc56, type: 2}
+  m_sharedMaterial: {fileID: 4371261407371886094, guid: f09824eb65dc51a44a1027ca88c8cc56, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -254,7 +254,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 4582891155407898611}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -273,5 +273,5 @@ MonoBehaviour:
   taskNameText: {fileID: 5739180383688190015}
   buttonBackground: {fileID: 4582891155407898611}
   availableSprite: {fileID: 21300000, guid: 31bf5827722aab849858a921b84b4ef0, type: 3}
-  inProgressSprite: {fileID: 21300000, guid: 1fb7aed6aefa3064e9a25162c331809e, type: 3}
-  completedSprite: {fileID: 21300000, guid: 79b9cf45bab3ea84682ef05bd92fd6b2, type: 3}
+  inProgressSprite: {fileID: 21300000, guid: dbc274ad59d309a4788ef8bf586a5eb1, type: 3}
+  completedSprite: {fileID: 21300000, guid: a3d33ad70a84e384a9f7674cad5f8253, type: 3}
