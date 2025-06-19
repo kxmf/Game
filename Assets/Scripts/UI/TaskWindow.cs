@@ -14,6 +14,13 @@ public class TaskWindow : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI consoleOutputText;
 
+    [Header("Компоненты прокрутки")]
+    [SerializeField]
+    private ScrollRect contentScrollRect;
+
+    [SerializeField]
+    private ScrollRect consoleScrollRect;
+
     [Header("Вкладки")]
     [SerializeField]
     private Button theoryTabButton;
@@ -83,6 +90,16 @@ public class TaskWindow : MonoBehaviour
         taskTabButton.GetComponent<Image>().color = isShowingTheory
             ? inactiveTabColor
             : activeTabColor;
+
+        StartCoroutine(ForceScrollTop(contentScrollRect));
+    }
+
+    private System.Collections.IEnumerator ForceScrollTop(ScrollRect scrollRect)
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (scrollRect != null)
+            scrollRect.verticalNormalizedPosition = 1f;
     }
 
     private void CheckCode()
