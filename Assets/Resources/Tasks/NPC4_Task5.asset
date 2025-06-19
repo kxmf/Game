@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611530bcc722b3f4fbc1906041d7ceb6, type: 3}
   m_Name: NPC4_Task5
   m_EditorClassIdentifier: 
-  taskId: 10
+  taskId: 12
   taskName: 5) Several conditions
-  prerequisiteTaskIds: 09000000
+  prerequisiteTaskIds: 0b000000
   TestCases:
   - InputData: "1\r\n2\r\n3\r"
     ExpectedOutput: 2
