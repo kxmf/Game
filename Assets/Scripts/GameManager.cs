@@ -172,7 +172,8 @@ public class GameManager : MonoBehaviour
         var progress = GetTaskProgressData(task.taskId);
         string savedCode = (progress != null) ? progress.savedCode : "";
 
-        progress.status = TaskStatus.InProgress;
+        if (progress.status == TaskStatus.Available)
+            progress.status = TaskStatus.InProgress;
         OnTaskStatusChanged?.Invoke(task.taskId);
 
         UIManager.instance.ShowTaskWindow(task, savedCode);
