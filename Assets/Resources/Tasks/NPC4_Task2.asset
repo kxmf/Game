@@ -15,7 +15,17 @@ MonoBehaviour:
   taskId: 9
   taskName: 2) Conditions
   prerequisiteTaskIds: 08000000
-  TestCases: []
+  TestCases:
+  - InputData: 2
+    ExpectedOutput: "\u041F\u0440\u0438\u043D\u0430\u0434\u043B\u0435\u0436\u0438\u0442"
+  - InputData: 18
+    ExpectedOutput: "\u041D\u0435 \u043F\u0440\u0438\u043D\u0430\u0434\u043B\u0435\u0436\u0438\u0442"
+  - InputData: 0
+    ExpectedOutput: "\u041F\u0440\u0438\u043D\u0430\u0434\u043B\u0435\u0436\u0438\u0442"
+  - InputData: 17
+    ExpectedOutput: "\u041F\u0440\u0438\u043D\u0430\u0434\u043B\u0435\u0436\u0438\u0442"
+  - InputData: -6
+    ExpectedOutput: "\u041D\u0435 \u043F\u0440\u0438\u043D\u0430\u0434\u043B\u0435\u0436\u0438\u0442"
   dialogueText: Hi
   theoryText: "\u041E\u0431\u0440\u0430\u0442\u0438 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435:
     \u0432 \u0443\u0441\u043B\u043E\u0432\u0438\u044F\u0445 \u043C\u044B \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u043C

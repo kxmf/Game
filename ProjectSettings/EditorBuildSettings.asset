@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 25112352874c2114cb0e98c98df09aeb
+  - enabled: 1
+    path: Assets/Scenes/WIPScene.unity
+    guid: c3f7e178d4bd7b5408e6b1564d2365ff
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

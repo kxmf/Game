@@ -71,8 +71,32 @@ public class UIManager : MonoBehaviour
 
     public void OnFloorButtonPressed(int floorIndex)
     {
-        Debug.Log($"Player selected Floor {floorIndex}. Loading scene...");
-        GameManager.instance.LoadGameScene(floorIndex);
+        Debug.Log($"Player selected Floor {floorIndex}.");
+
+        var selectedFloor = GameManager.instance.GetFloorData(floorIndex);
+
+        if (selectedFloor == null)
+        {
+            Debug.LogError($"Не найдены данные для этажа с индексом {floorIndex}!");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(selectedFloor.sceneToLoad))
+        {
+            Debug.LogError(
+                $"Для этажа '{selectedFloor.floorIndex}' не указана сцена для загрузки!"
+            );
+            return;
+        }
+
+        Debug.Log(
+            $"Loading scene: '{selectedFloor.sceneToLoad}' for floor '{selectedFloor.floorIndex}'"
+        );
+
+        if (selectedFloor.sceneToLoad == "GameScene")
+            GameManager.instance.LoadGameScene(floorIndex);
+        else
+            SceneManager.LoadScene(selectedFloor.sceneToLoad);
     }
 
     public void OnQuitButtonPressed()

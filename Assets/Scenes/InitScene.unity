@@ -175,6 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66224bd5d4cee064a8dc27f336fa2dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allFloors:
+  - {fileID: 11400000, guid: fd3f57ace00b53a4cbf756c841e35403, type: 2}
+  - {fileID: 11400000, guid: b7b2950d6f0af8442807baf096810860, type: 2}
 --- !u!4 &1659364577
 Transform:
   m_ObjectHideFlags: 0

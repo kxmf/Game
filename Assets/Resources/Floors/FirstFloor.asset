@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d033c49749fab42be1ab86ab1ead91, type: 3}
+  m_Name: FirstFloor
+  m_EditorClassIdentifier: 
+  floorIndex: 0
+  sceneToLoad: GameScene
+  tasksOnThisFloor:
+  - {fileID: 11400000, guid: 8d867c0985390e64288a13b9ea76e338, type: 2}
+  - {fileID: 11400000, guid: 1bd3a6732c24c854687d35740668ff91, type: 2}
+  - {fileID: 11400000, guid: 310948e32451204488939755e7f23223, type: 2}
+  - {fileID: 11400000, guid: 53cb5cfb5f34bce4e906cd0b31a73aad, type: 2}
+  - {fileID: 11400000, guid: ee85953361d19cb4aa0bd72f8c193ab9, type: 2}
+  - {fileID: 11400000, guid: 27f92100c6ab1bf4ba3d5c4e251e48e8, type: 2}
+  - {fileID: 11400000, guid: 3d5e06d0f0731c44e83ac249544d3f76, type: 2}
+  - {fileID: 11400000, guid: a7ff14faff479ff48869edc7fd208afa, type: 2}
+  - {fileID: 11400000, guid: 938c80d6410cf3847bf122b6e50f5a9f, type: 2}
+  - {fileID: 11400000, guid: c6e51236a1268e54886c34eb3ee5affd, type: 2}
+  - {fileID: 11400000, guid: 387d0ead67721e943856e847a3b54577, type: 2}
+  - {fileID: 11400000, guid: 8c7ac78c8ec128048969e02438b787ad, type: 2}
+  - {fileID: 11400000, guid: 1fced7261ed58bf4fb49a9ab6864e94f, type: 2}
+  unlocksFloorIndex: 1

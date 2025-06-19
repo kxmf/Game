@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private SaveManager saveManager;
     private PythonExecutor pythonExecutor;
 
-    public int UnlockedFloorsCount { get; private set; }
+    public int UnlockedFloorsCount { get; set; }
 
     public int CurrentFloorIndex { get; private set; }
 
@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     private string previousSceneName;
 
     public static event Action<int> OnTaskStatusChanged;
+
+    [Header("Данные об этажах")]
+    [SerializeField]
+    private List<FloorData> allFloors;
 
     void Awake()
     {
@@ -246,14 +250,58 @@ public class GameManager : MonoBehaviour
             progress.status = TaskStatus.Completed;
             OnTaskStatusChanged?.Invoke(taskId);
             UpdateAllTasksAvailability();
+            CheckForFloorUnlock();
         }
+    }
+
+    private void CheckForFloorUnlock()
+    {
+        foreach (var floorData in allFloors)
+        {
+            if (floorData.unlocksFloorIndex < 0)
+                continue;
+
+            if (UnlockedFloorsCount >= floorData.unlocksFloorIndex)
+                continue;
+
+            bool allTasksCompleted = true;
+            if (floorData.tasksOnThisFloor.Count == 0)
+                allTasksCompleted = true;
+            else
+            {
+                foreach (var task in floorData.tasksOnThisFloor)
+                {
+                    if (GetTaskProgressData(task.taskId).status != TaskStatus.Completed)
+                    {
+                        allTasksCompleted = false;
+                        break;
+                    }
+                }
+            }
+
+            if (allTasksCompleted)
+            {
+                Debug.Log(
+                    $"GAME MANAGER: Все задачи на этаже {floorData.floorIndex} выполнены! Разблокируем этаж {floorData.unlocksFloorIndex}."
+                );
+
+                UnlockedFloorsCount = floorData.unlocksFloorIndex;
+                saveManager.SaveProgress(UnlockedFloorsCount);
+            }
+        }
+    }
+
+    public FloorData GetFloorData(int floorIndex)
+    {
+        return allFloors.Find(f => f.floorIndex == floorIndex);
     }
 
     private void OnApplicationQuit()
     {
-        if (saveManager != null && TasksProgress != null)
-            saveManager.SaveTaskProgress(TasksProgress);
+        if (saveManager == null)
+            return;
 
-        // saveManager.SaveProgress(UnlockedFloorsCount);
+        saveManager.SaveTaskProgress(TasksProgress);
+        saveManager.SaveProgress(UnlockedFloorsCount);
     }
 }

@@ -55,21 +55,21 @@ public class GameSceneView : MonoBehaviour
 
     public void ShowTask(TaskData task, string savedCode)
     {
-        if (backButtonObject != null)
-            backButtonObject.SetActive(false);
-        if (settingsButtonObject != null)
-            settingsButtonObject.SetActive(false);
-
+        SetActive(false);
         taskWindow.Show(task, savedCode);
     }
 
     public void HideTask()
     {
-        if (backButtonObject != null)
-            backButtonObject.SetActive(true);
-        if (settingsButtonObject != null)
-            settingsButtonObject.SetActive(true);
-
+        SetActive(true);
         taskWindow.gameObject.SetActive(false);
+    }
+
+    private void SetActive(bool isActive)
+    {
+        if (backButtonObject != null)
+            backButtonObject.SetActive(isActive);
+        if (settingsButtonObject != null)
+            settingsButtonObject.SetActive(isActive);
     }
 }
